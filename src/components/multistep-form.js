@@ -28,7 +28,7 @@ const Customdiv = styled.div`
   margin-top: 50px;
   @media (max-width: 768px) {
     width: 85%;
-    top: 85%;
+    top: 95%;
     margin: 0px;
     margin-bottom: 50px;
     padding: 20px;
@@ -44,14 +44,14 @@ export default class Multistep extends Component {
     UserName: "",
     Email: "",
     Password: "",
-    
-    Occupation:"",
-    Company:"",
-    Location:"",
+
+    Occupation: "",
+    Company: "",
+    Location: "",
     Gender: "",
 
-    Date:new Date(),
-    Time:new Date()
+    Date: new Date(),
+    Time: new Date(),
   };
 
   render() {
@@ -66,11 +66,11 @@ export default class Multistep extends Component {
     };
 
     const handleChange = (input) => (e) => {
-        if(input === "Date" || input === "Time"){
-            this.setState({ [input]: e });
-        }else{
-            this.setState({ [input]: e.target.value });
-        } 
+      if (input === "Date" || input === "Time") {
+        this.setState({ [input]: e });
+      } else {
+        this.setState({ [input]: e.target.value });
+      }
     };
     const handleBack = () => {
       let prevStep = this.state.activeStep;
@@ -87,16 +87,40 @@ export default class Multistep extends Component {
         UserName: "",
         Email: "",
         Password: "",
-        Occupation:"",
-        Company:"",
-        Location:"",
-        Gender: ""
+        Occupation: "",
+        Company: "",
+        Location: "",
+        Gender: "",
       });
     };
     const { activeStep } = this.state;
 
-    const { FirstName, LastName, UserName, Email, Password,  Occupation, Company, Location, Gender, Date, Time } = this.state;
-    const Data = { FirstName, LastName, UserName, Email, Password, Occupation, Company, Location, Gender, Date, Time };
+    const {
+      FirstName,
+      LastName,
+      UserName,
+      Email,
+      Password,
+      Occupation,
+      Company,
+      Location,
+      Gender,
+      Date,
+      Time,
+    } = this.state;
+    const Data = {
+      FirstName,
+      LastName,
+      UserName,
+      Email,
+      Password,
+      Occupation,
+      Company,
+      Location,
+      Gender,
+      Date,
+      Time,
+    };
     const steps = getSteps();
     function getStepContent(step) {
       switch (step) {
@@ -105,7 +129,7 @@ export default class Multistep extends Component {
         case 1:
           return <Personaldetails handleChange={handleChange} details={Data} />;
         case 2:
-          return <Bookslot handleChange={handleChange} details={Data} />;;
+          return <Bookslot handleChange={handleChange} details={Data} />;
         default:
           return "Unknown step";
       }
@@ -117,14 +141,12 @@ export default class Multistep extends Component {
             <Step key={label}>
               <StepLabel></StepLabel>
               <StepContent>
-                <p>
-                  {label}
-                </p>
+                <p>{label}</p>
                 <Typography component={"span"}>
                   {getStepContent(index)}
                 </Typography>
                 <div>
-                  <div style={{marginTop:"25px"}}>
+                  <div style={{ marginTop: "25px" }}>
                     <Button
                       disabled={activeStep === 0}
                       onClick={handleBack}
@@ -161,10 +183,10 @@ export default class Multistep extends Component {
         </Stepper>
         {activeStep === steps.length && (
           <Paper square elevation={0}>
-          <img src={bruh} alt=""/>
+            <img src={bruh} alt="" />
             <Typography component={"span"}>
               <p>
-                All steps completed - you&apos;re finished{" "}
+                Thank you for the submission! <span aria-label="emoji" role="img">😄</span>
               </p>
             </Typography>
             <Button

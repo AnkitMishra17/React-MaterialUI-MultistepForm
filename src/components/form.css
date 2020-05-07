@@ -9,5 +9,5 @@ p{
 img{
     height: 270px;
     width: 270px;
-    padding:20px;
+    transform: scale(1.25);
 }
