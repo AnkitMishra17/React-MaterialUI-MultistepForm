@@ -28,7 +28,7 @@ const Customdiv = styled.div`
   margin-top: 50px;
   @media (max-width: 768px) {
     width: 85%;
-    top: 75%;
+    top: 85%;
     margin: 0px;
     margin-bottom: 50px;
     padding: 20px;
