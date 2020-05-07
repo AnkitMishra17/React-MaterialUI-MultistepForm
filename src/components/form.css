@@ -1,0 +1,13 @@
+p{
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 42px;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+}
+img{
+    height: 270px;
+    width: 270px;
+    padding:20px;
+}

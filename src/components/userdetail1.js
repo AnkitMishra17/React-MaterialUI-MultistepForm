@@ -1,17 +1,19 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import IconButton from '@material-ui/core/IconButton';  
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const Customform = styled.form`
-  width: 80%;
+  width: 90%;
   border-radius: 15px;
-  border-top: 5px solid #E0436B;
+  border-top: 5px solid #e0436b;
   box-shadow: -10px -10px 30px 2px rgba(0, 0, 0, 0.1);
   margin: 10px;
   padding: 50px;
@@ -23,87 +25,96 @@ const Customform = styled.form`
     padding-top: 30px;
   }
 `;
-export default function Userdetail1() {
-  const [values, setValues] = React.useState({
-    FirstName: '',
-    LastName: '',
-    UserName: '',
-    Email: '',
-    Password: '',
+export default class Userdetail1 extends Component {
+  state = {
     showPassword: false,
-  });
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-    console.log(values);
   };
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  render() {
+    const { handleChange, details } = this.props;
+    const { showPassword } = this.state;
+    const handleClickShowPassword = () => {
+      let passwordstate = this.state.showPassword;
+      this.setState({
+        showPassword: !passwordstate,
+      });
+    };
+    const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+    };
     return (
-        <div>
-      <Customform autoComplete="on">
-        <Grid container spacing={3} justify="center" alignItems="center">
-          <Grid item md={4}>
-            <TextField
-              required
-              onChange={handleChange('FirstName')}
-              label="FirstName"
-              variant="outlined"
-              defaultValue={values.FirstName}
-            />
+      <div>
+        <Customform>
+          <Grid container spacing={3} justify="center" alignItems="center">
+            <Grid item md={4}>
+              <TextField
+                required
+                onChange={handleChange("FirstName")}
+                label="FirstName"
+                variant="outlined"
+                defaultValue={details.FirstName}
+              />
+            </Grid>
+            <Grid item md={4}>
+              <TextField
+                required
+                onChange={handleChange("LastName")}
+                label="LastName"
+                variant="outlined"
+                defaultValue={details.LastName}
+              />{" "}
+            </Grid>
+            <Grid item md={4}>
+              <TextField
+                required
+                onChange={handleChange("UserName")}
+                label="Username"
+                variant="outlined"
+                defaultValue={details.UserName}
+              />{" "}
+            </Grid>
+            <Grid item md={4}>
+              <TextField
+                required
+                onChange={handleChange("Email")}
+                label="E-mail"
+                variant="outlined"
+                defaultValue={details.Email}
+              />{" "}
+            </Grid>
+            <Grid item md={4}>
+              <FormControl variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  value={details.password}
+                  onChange={handleChange("Password")}
+                  variant="outlined"
+                  defaultValue={details.Password}
+                  endAdornment={
+                    <InputAdornment position="end" label="Password">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  labelWidth={70}
+                />
+              </FormControl>
+            </Grid>
           </Grid>
-          <Grid item md={4}>
-            <TextField
-              required
-              onChange={handleChange('LastName')}
-              label="LastName"
-              variant="outlined"
-            />{" "}
-          </Grid>
-          <Grid item md={4}>
-            <TextField
-              required
-              onChange={handleChange('Email')}
-              label="E-mail"
-              variant="outlined"
-            />{" "}
-          </Grid>
-          <Grid item md={4}>
-            <TextField
-              required
-              onChange={handleChange('Username')}
-              label="Username"
-              variant="outlined"
-            />{" "}
-          </Grid>
-          <Grid item md={4}>
-      <OutlinedInput
-        id="outlined-adornment-password"
-        type={values.showPassword ? 'text' : 'password'}
-        value={values.password}
-        onChange={handleChange('Password')}
-        endAdornment={
-          <InputAdornment position="end" 
-          label="Password">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-              edge="end"
-            >
-              {values.showPassword ? <Visibility /> : <VisibilityOff />}
-            </IconButton>
-          </InputAdornment>
-        }
-        labelWidth={70}
-      />
-          </Grid>
-        </Grid>
-      </Customform></div>
-    )
+        </Customform>
+      </div>
+    );
+  }
 }
